@@ -1,0 +1,13 @@
+  210  git commit -m 'removing oops'
+  211  git push
+  212  git status
+  213  vi oops2.txt
+  215  git commit -m 'adding oops2'
+  216  git push
+  217  rm oops2.txt
+  219  git commit -m 'removing oops2'
+  220  git push
+  221  touch never
+  222  git add never
+  223  git reset never
+  225  man rm
