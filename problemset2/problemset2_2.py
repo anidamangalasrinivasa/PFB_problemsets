@@ -31,6 +31,8 @@ if var1>0:
             print(var1, 'is larger than 50 but not divisible by 3')
     else:
         print(var1, 'is probably 50')
-else:
+elif var1<0:
     print(var1, 'is negative')
+else:
+    print(var1, 'is probably 0')
 
