@@ -13,7 +13,7 @@ elif var1==0:
 else:
     print("it is negative")
 
-#5. nested
+#5-7. nested
 
 if var1>0:
     print("test 2: it is positive")
