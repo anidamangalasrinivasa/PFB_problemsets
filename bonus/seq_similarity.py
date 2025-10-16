@@ -11,4 +11,4 @@ for n in range(len(seq1)):
 
 seq1A=seq1.replace('-','')
 
-print(f'Percentage identity of these 2 sequences is: {(identity/len(seq1A)):.2%}')
+print(f'Percentage identity of these 2 sequences is: {(identity/(len(seq1A)-7)):.2%}')
