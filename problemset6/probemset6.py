@@ -52,8 +52,8 @@ avg_length=count_char/count_line
 avg_seq_length=length_NT/count_NT
 count_seq_ID=count_line/4
 
-
-print(f'total number of seq IDs: {count_seq_ID},Average length of all seqs: {avg_length},Total number of nucleotide lines: {count_NT/2},Total number of NTs:{length_NT/2},Average NT line length:{avg_seq_length}')   
+#this code calculates parameters for NT sequence and quality lines. So to get the actual count of nucleotide lines and characters, you divide the count by 2 to get the relevant numbers (because length of NT sequence and quality lines are the same)
+print(f'total number of seq IDs: {count_seq_ID},Average length of all seqs: {avg_length},Total number of nucleotide lines: {count_NT/2},Total number of NTs:{length_NT/2},Average NT line length:{avg_seq_length}')  
         
         
 
