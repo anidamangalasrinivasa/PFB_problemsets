@@ -9,6 +9,8 @@ for n in range(len(seq1)):
     if seq1[n]==seq2[n]:
         identity+=1
 
+#ClustalO calculates identity WITHOUT gaps. So we have to remove the number of gaps from both seq1A and the subtract the number of seq2 gaps from total length
 seq1A=seq1.replace('-','')
+total_gaps_in_seq2=seq2.count('-')
 
-print(f'Percentage identity of these 2 sequences is: {(identity/(len(seq1A)-7)):.2%}')
+print(f'Percentage identity of these 2 sequences is: {(identity/(len(seq1A)-total_gaps_in_seq2)):.2%}')
