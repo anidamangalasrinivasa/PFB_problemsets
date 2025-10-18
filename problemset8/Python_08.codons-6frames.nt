@@ -1,0 +1,20 @@
+seq1-frame 1-codons
+	AAA	CTG	TGG	
+RC seq1-frame 1-codons	CAG	CCA	TTT	
+seq1-frame 2-codons
+	AAT	GGC	TG	
+RC seq1-frame 2-codons	AGC	CAT	TT	
+seq1-frame 3-codons
+	ATG	G	GCT	
+RC seq1-frame 3-codons	ATT	GCC	T	
+
+seq2-frame 1-codons
+	AAG	CTC	GAA	TGC	
+RC seq2-frame 1-codons	CTT	GAG	GCA	TTC	
+seq2-frame 2-codons
+	AAT	AGC	GC	TCG	
+RC seq2-frame 2-codons	AGC	CAT	TCG	TT	
+seq2-frame 3-codons
+	ATG	C	CGA	GCT	
+RC seq2-frame 3-codons	ATT	CGA	GCT	T	
+
