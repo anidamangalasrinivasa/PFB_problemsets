@@ -7,7 +7,6 @@ seqs={}
 gene_list={}
 seq_temp=''
 gene_id_temp=''
-orfs=[]
 
 with open(input,'r') as seq:
     for line in seq:
@@ -43,29 +42,85 @@ translation_table = {
     'TAA':'*', 'TGA':'*', 'TAG':'*'
 }
 
-with open('Python_08.codons-6frames.nt','w') as codons, open('Python_08.translated.aa','w') as translated, open('Python_08.translated-longest.aa','w') as longest:
+orfs={}
+orfs_rev={}
+
+with open('Python_08.codons-6frames.nt','w') as cods, open('Python_08.translated.aa','w') as translated:
     for gene in gene_list:
         for start in range(3):
             gene_seq=gene_list[gene]
+            AA_seq=''
+            AA_seq_rev=''
             seq_c=gene_seq.replace('A', 't').replace('T', 'a').replace('G', 'c').replace('C', 'g')
             seq_c1=seq_c.upper()
             seq_rc=seq_c1[::-1]
             codons=re.findall(r'(.{,3})',gene_seq[start:])
-            translated.write(f'Translation for {gene}-frame {start+1}\n')
-            codons.write(f'{gene}-frame {start+1}-codons\n')
+            translated.write(f'Translation for {gene}-frame {start+1}\n') #writing translation heading
+            cods.write(f'{gene}-frame {start+1}-codons\n') #writing codons heading
             for codon in codons:
-                codons.write(f'{codon}\t')
+                cods.write(f'{codon}-') #writing codons to codon file
+                if gene not in orfs.keys():
+                    orfs[gene]={}
+                if start+1 not in orfs[gene]:
+                    orfs[gene][start+1]={}
                 if codon in translation_table.keys():
                     amino=translation_table[codon]
-                    translated.write(amino)
+                    translated.write(amino) #writing amino acid to translated file WITHOUT space
+                    AA_seq+=amino
+                    orfs[gene][start+1]=AA_seq
             translated.write('\n')
+            cods.write('\n') #adding a new line to translation after all forward codons were translated
             re_codons=re.findall(r'(.{,3})',seq_rc[start:])
-            translated.write(f'Translation for RC {gene}-frame {start+1}\n')
+            translated.write(f'Translation for RC {gene}-frame {start+1}\n') #writing to translation file
+            cods.write(f'RC {gene}-frame {start+1}-codons\n') #writing to codon file
             for codon in re_codons:
-                codons.write(f'{codon}\t')
+                cods.write(f'{codon}-') #writing reverse codon to codon file
+                if start+4 not in orfs[gene]:
+                    orfs[gene][start+4]={}
                 if codon in translation_table.keys():
                     amino=translation_table[codon]
-                    translated.write(amino)
+                    AA_seq_rev+=amino
+                    orfs[gene][start+4]=AA_seq_rev
+                    translated.write(amino) #adding reverse codon AA to translated file without space
+            cods.write('\n')
             translated.write('\n')
+        cods.write('\n')
         translated.write('\n')
 
+#Finding longest ORF
+orf_collection={}
+longest_orf={}
+
+for genes in orfs.keys():
+    if genes not in orf_collection.keys():
+            orf_collection[genes]={}
+    for key1 in range(1,7):
+        if key1 not in orf_collection[genes]:
+            orf_collection[genes][key1]=[]
+        query=orfs[genes][key1]
+        orf_seq=re.findall(r'(M.+?\*)', query)
+        orf_collection[genes][key1]+=orf_seq
+
+#print(orf_collection)
+    
+for genes in orf_collection:
+    if genes not in longest_orf.keys():
+        longest_orf[genes]={}
+    for key1 in range(1,7):
+        if key1 not in longest_orf[genes]:
+            longest_orf[genes][key1]=''
+        query2=orf_collection[genes][key1]
+        if query2:
+            maxi_len=max(query2,key=len)
+            longest_orf[genes][key1]=maxi_len
+        
+#print(longest_orf)
+
+#writing this to a file:
+
+with open('Python_08.translated-longest.aa','w') as lo_write:
+    for genes in longest_orf:
+        lo_write.write(f'Longest ORF for each translation frame in gene {genes}\n')
+        for keys in range(1,7):
+            string1=longest_orf[genes][keys]
+            lo_write.write(f'Translation frame: {keys}\n >{genes}\n{string1}\n')
