@@ -35,6 +35,7 @@ class DNA_deets(object):
         print(f'>{self.gene_name}')
         for lines in split_lines_2:
             print(f'{lines}')
+        
     def show(self):
         list1=[self.gene_name, self.sequence, self.organism]
         return list1
