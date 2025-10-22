@@ -42,11 +42,11 @@ def count_kmers(kmer_list):
     ##################
     ## Step 2:
     ## begin your code
-    for kmers in kmer_list:
-        if kmers not in kmer_count_dict.keys():
-            kmer_count_dict[kmers]=1
+    for kmer in kmer_list:
+        if kmer not in kmer_count_dict.keys():
+            kmer_count_dict[kmer]=1
         else:
-            kmer_count_dict[kmers]+=1
+            kmer_count_dict[kmer]+=1
     ## end your code
     ################
 
