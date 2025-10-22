@@ -30,9 +30,7 @@ def sequence_to_kmer_list(sequence, kmer_length):
     ## begin your code
     
     for i in range(len(sequence)-kmer_length+1):
-        temp_kmer=''
-        temp_kmer=sequence[i:(kmer_length+i)]
-        kmers_list.append(temp_kmer)
+        kmers_list.append(sequence[i:(kmer_length+i)])
     ## end your code
     return kmers_list
 
