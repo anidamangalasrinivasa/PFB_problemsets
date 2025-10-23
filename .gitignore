@@ -1,0 +1,2 @@
+bowtie/bowtie2.sam
+git rm --cached bowtie2.sam
